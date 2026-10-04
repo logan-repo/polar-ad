@@ -20,5 +20,12 @@ public static class BuiltInRules
         "siape.veta.naver.com",
         "ader.naver.com",
         "wcs.naver.com",
+        "recoshopping.naver.com",
+        "shopsquare.naver.com",
+
+        // Korean ad and tracking networks named in the earlier analysis.
+        "wtg-ads.com",
+        "acecounter.com",
+        "netinsight.co.kr",
     };
 }
