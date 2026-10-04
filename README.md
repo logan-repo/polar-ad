@@ -1,10 +1,8 @@
-# Polar Ad
+﻿# Polar Ad
 
 **조용히 광고를 걸러냅니다.**
 
 Polar Ad는 Windows PC의 **모든 브라우저**(Chrome, Edge, Firefox 등)에서 광고와 추적 요청을 차단하는 프로그램입니다. 브라우저마다 확장 프로그램을 따로 설치할 필요가 없고, 한 번 설치하면 컴퓨터를 켤 때 자동으로 보호가 켜집니다.
-
-![Polar Ad 디자인 시안](docs/images/design-concept.webp)
 
 > 설치 프로그램 이름은 **Polar Project**입니다. 프로그램 안에서는 **Polar Ad**로 표시됩니다.
 
@@ -25,14 +23,9 @@ Polar Ad는 Windows PC의 **모든 브라우저**(Chrome, Edge, Firefox 등)에�
 
 ## 화면 미리보기
 
-<!-- 실제 실행 화면 스크린샷을 아래 경로에 넣어 주세요. -->
 | 홈 (보호 중) | 차단 목록 |
 |---|---|
-| `docs/images/screenshot-home.png` | `docs/images/screenshot-blocklist.png` |
-
-| 활동 기록 | 보호 설정 |
-|---|---|
-| `docs/images/screenshot-log.png` | `docs/images/screenshot-protection.png` |
+| ![홈 화면](docs/images/screenshot-home.png) | ![차단 목록 화면](docs/images/screenshot-blocklist.png) |
 
 ---
 
