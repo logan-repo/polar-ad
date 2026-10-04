@@ -66,16 +66,16 @@ public partial class MainWindow : Window
 
         AdminStatusText.Text = isAdmin
             ? ""
-            : "Not running as administrator. Ad blocking cannot change this PC's DNS until you restart Polar Ad with administrator rights.";
+            : "관리자 권한으로 실행되지 않았습니다. 관리자 권한으로 다시 실행하기 전까지는 이 PC의 DNS를 바꿀 수 없어 광고 차단이 동작하지 않습니다.";
     }
 
     private void RefreshDashboard()
     {
         bool on = _service.IsRunning;
-        ProtectionTitle.Text = on ? "Protection active" : "Protection paused";
+        ProtectionTitle.Text = on ? "보호 중" : "보호 꺼짐";
         ProtectionSubtitle.Text = on
-            ? "Browsing is quieter and cleaner."
-            : "Ad blocking is off. Turn it on to block ads and trackers.";
+            ? "더 깔끔하고 조용한 인터넷 환경입니다."
+            : "광고 차단이 꺼져 있습니다. 켜면 광고와 추적 요청을 차단합니다.";
         ProtectionToggle.IsChecked = on;
 
         StatBlocked.Text = _service.LogStore.TotalBlockedCount.ToString("N0");
@@ -87,8 +87,8 @@ public partial class MainWindow : Window
 
         var lastUpdate = _service.Settings.LastBlocklistUpdate;
         BlocklistInfoText.Text = lastUpdate.HasValue
-            ? $"{_service.RuleEngine.PublicBlocklist.Count:N0} domains · last updated {lastUpdate.Value.LocalDateTime:yyyy-MM-dd HH:mm}"
-            : $"{_service.RuleEngine.PublicBlocklist.Count:N0} domains · not updated yet";
+            ? $"도메인 {_service.RuleEngine.PublicBlocklist.Count:N0}개 · 마지막 업데이트 {lastUpdate.Value.LocalDateTime:yyyy-MM-dd HH:mm}"
+            : $"도메인 {_service.RuleEngine.PublicBlocklist.Count:N0}개 · 아직 업데이트하지 않음";
     }
 
     private async void ProtectionToggle_Click(object sender, RoutedEventArgs e)
@@ -123,7 +123,7 @@ public partial class MainWindow : Window
             if (AutoStartCheckBox.IsChecked == true)
             {
                 var exePath = Process.GetCurrentProcess().MainModule?.FileName
-                    ?? throw new InvalidOperationException("Could not determine the executable path.");
+                    ?? throw new InvalidOperationException("실행 파일 경로를 확인할 수 없습니다.");
                 AutoStartManager.Enable(exePath);
             }
             else
@@ -133,7 +133,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"Could not update the startup task: {ex.Message}", "Polar Ad",
+            System.Windows.MessageBox.Show($"시작 프로그램 설정을 바꾸지 못했습니다: {ex.Message}", "Polar Ad",
                 System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
 
             _loadingSettings = true;
@@ -146,21 +146,21 @@ public partial class MainWindow : Window
     {
         if (!int.TryParse(AutoUpdateIntervalTextBox.Text, out var hours) || hours < 1)
         {
-            System.Windows.MessageBox.Show("Enter a whole number of hours, 1 or more.", "Polar Ad",
+            System.Windows.MessageBox.Show("1 이상의 정수 시간을 입력하세요.", "Polar Ad",
                 System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
             return;
         }
 
         _service.Settings.AutoUpdateIntervalHours = hours;
         SettingsStore.Save(AppPaths.SettingsFile, _service.Settings);
-        System.Windows.MessageBox.Show("Saved.", "Polar Ad", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        System.Windows.MessageBox.Show("저장했습니다.", "Polar Ad", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
     }
 
     private async void EmergencyRestoreButton_Click(object sender, RoutedEventArgs e)
     {
         await _service.EmergencyRestoreAsync();
         RefreshDashboard();
-        System.Windows.MessageBox.Show("Network settings restored to their original DNS.", "Polar Ad",
+        System.Windows.MessageBox.Show("네트워크 설정을 원래 DNS로 복구했습니다.", "Polar Ad",
             System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
     }
 
@@ -169,13 +169,13 @@ public partial class MainWindow : Window
     private async void UpdateBlocklistButton_Click(object sender, RoutedEventArgs e)
     {
         UpdateBlocklistButton.IsEnabled = false;
-        BlocklistUpdateStatusText.Text = "Updating…";
+        BlocklistUpdateStatusText.Text = "업데이트 중…";
         try
         {
             var result = await _service.UpdateBlocklistAsync();
             BlocklistUpdateStatusText.Text = result.Success
-                ? $"Done: {result.DomainCount:N0} domains loaded"
-                : $"Failed: {string.Join("; ", result.Errors)}";
+                ? $"완료: 도메인 {result.DomainCount:N0}개를 불러왔습니다"
+                : $"실패: {string.Join("; ", result.Errors)}";
         }
         finally
         {
@@ -244,12 +244,12 @@ public partial class MainWindow : Window
         {
             _service.AddAllowlistEntry(row.Domain);
             RefreshRuleLists();
-            System.Windows.MessageBox.Show($"'{row.Domain}' was added to your allowed sites. Reload the page in your browser.",
+            System.Windows.MessageBox.Show($"'{row.Domain}'을(를) 허용한 사이트에 추가했습니다. 브라우저에서 페이지를 새로고침하세요.",
                 "Polar Ad", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
         else
         {
-            System.Windows.MessageBox.Show("Select a domain in the log first.", "Polar Ad",
+            System.Windows.MessageBox.Show("먼저 기록에서 도메인을 선택하세요.", "Polar Ad",
                 System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
     }
@@ -292,7 +292,7 @@ public partial class MainWindow : Window
 
         _service.Settings.BlocklistSources = urls;
         SettingsStore.Save(AppPaths.SettingsFile, _service.Settings);
-        System.Windows.MessageBox.Show("Saved. Run 'Update now' on the Block List page to apply.", "Polar Ad",
+        System.Windows.MessageBox.Show("저장했습니다. 적용하려면 차단 목록 화면에서 '지금 업데이트'를 누르세요.", "Polar Ad",
             System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
     }
 

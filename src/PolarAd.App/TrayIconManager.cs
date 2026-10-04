@@ -23,7 +23,7 @@ public sealed class TrayIconManager : IDisposable
 
         var menu = new ContextMenuStrip();
 
-        var openItem = new ToolStripMenuItem("PolarAd 열기");
+        var openItem = new ToolStripMenuItem("Polar Ad 열기");
         openItem.Click += (_, _) => ShowMainWindow();
         menu.Items.Add(openItem);
 
@@ -39,10 +39,10 @@ public sealed class TrayIconManager : IDisposable
 
         _icon = new NotifyIcon
         {
-            Icon = SystemIcons.Shield,
+            Icon = System.Drawing.Icon.ExtractAssociatedIcon(Environment.ProcessPath!) ?? SystemIcons.Shield,
             Visible = true,
             ContextMenuStrip = menu,
-            Text = "PolarAd",
+            Text = "Polar Ad",
         };
         _icon.DoubleClick += (_, _) => ShowMainWindow();
 
@@ -51,7 +51,7 @@ public sealed class TrayIconManager : IDisposable
 
     public void UpdateStatusText()
     {
-        _icon.Text = _service.IsRunning ? "PolarAd - 보호 중" : "PolarAd - 꺼짐";
+        _icon.Text = _service.IsRunning ? "Polar Ad - 보호 중" : "Polar Ad - 꺼짐";
         _toggleItem.Text = _service.IsRunning ? "보호 기능 끄기" : "보호 기능 켜기";
     }
 

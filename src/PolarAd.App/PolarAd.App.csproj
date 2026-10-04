@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\PolarAd.Core\PolarAd.Core.csproj" />
@@ -27,5 +27,13 @@
     -->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <ApplicationIcon>Assets\polarad.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\polarad.ico" />
+  </ItemGroup>
 
 </Project>

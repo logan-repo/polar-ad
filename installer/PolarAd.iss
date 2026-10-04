@@ -23,9 +23,9 @@
 ;     files — so an uninstall never leaves the system pointed at a DNS
 ;     resolver that's about to stop existing.
 
-#define MyAppName "PolarAd"
+#define MyAppName "Polar Project"
 #define MyAppVersion "0.2.0"
-#define MyAppPublisher "PolarAd Project"
+#define MyAppPublisher "Polar Project"
 #define MyAppExeName "PolarAd.exe"
 
 [Setup]
@@ -40,11 +40,12 @@ PrivilegesRequired=admin
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 OutputDir=output
-OutputBaseFilename=PolarAdSetup-{#MyAppVersion}
+OutputBaseFilename=PolarProjectSetup-{#MyAppVersion}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
 UninstallDisplayIcon={app}\{#MyAppExeName}
+SetupIconFile=..\src\PolarAd.App\Assets\polarad.ico
 
 [Languages]
 Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
