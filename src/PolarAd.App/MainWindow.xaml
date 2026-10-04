@@ -1,0 +1,288 @@
+<Window x:Class="PolarAd.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Polar Ad" Height="700" Width="1040" MinWidth="880" MinHeight="600"
+        Background="{StaticResource IvoryBrush}"
+        Closing="Window_Closing">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="{StaticResource NavyBrush}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="22,26,22,22">
+                    <TextBlock FontSize="24" FontWeight="Bold" Foreground="White">
+                        <Run Text="Polar "/><Run Text="Ad" Foreground="{StaticResource GoldBrush}"/>
+                    </TextBlock>
+                    <TextBlock Text="Quietly blocks the clutter." FontSize="12" Foreground="#9FB3C4" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Top" Margin="0,8,0,0">
+                    <RadioButton x:Name="NavHome" GroupName="Nav" Style="{StaticResource NavButton}" Tag="&#xE80F;" Content="Home" IsChecked="True" Click="NavHome_Click"/>
+                    <RadioButton x:Name="NavProtection" GroupName="Nav" Style="{StaticResource NavButton}" Tag="&#xE83D;" Content="Protection" Click="NavProtection_Click"/>
+                    <RadioButton x:Name="NavBlockList" GroupName="Nav" Style="{StaticResource NavButton}" Tag="&#xE8FD;" Content="Block List" Click="NavBlockList_Click"/>
+                    <RadioButton x:Name="NavSettings" GroupName="Nav" Style="{StaticResource NavButton}" Tag="&#xE713;" Content="Settings" Click="NavSettings_Click"/>
+                    <RadioButton x:Name="NavAbout" GroupName="Nav" Style="{StaticResource NavButton}" Tag="&#xE946;" Content="About" Click="NavAbout_Click"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Pages -->
+        <Grid Grid.Column="1" Margin="32,28,32,24">
+
+            <!-- Home -->
+            <Grid x:Name="HomePage">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="0,0,0,18">
+                    <TextBlock x:Name="ProtectionTitle" Text="Protection active" FontSize="30" FontWeight="Bold" Foreground="{StaticResource NavyBrush}"/>
+                    <TextBlock x:Name="ProtectionSubtitle" Text="Browsing is quieter and cleaner." FontSize="14" Style="{StaticResource BodyMuted}" Margin="0,2,0,0"/>
+                    <TextBlock x:Name="AdminStatusText" Foreground="#9B2C2C" FontSize="12" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="56" Height="56" CornerRadius="28" Background="{StaticResource GreenSoftBrush}" Margin="0,0,16,0">
+                            <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" FontSize="24" Foreground="{StaticResource GreenBrush}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="Ad blocking" FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource NavyBrush}"/>
+                            <TextBlock Text="Blocks ads and trackers across the web for every browser on this PC."
+                                       Style="{StaticResource BodyMuted}" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <ToggleButton x:Name="ProtectionToggle" Grid.Column="2" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center"
+                                      Click="ProtectionToggle_Click"/>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2" Margin="0,0,0,14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="&#xE8F8;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="#B88A2E"/>
+                            <TextBlock x:Name="StatBlocked" Text="0" FontSize="26" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,8,0,0"/>
+                            <TextBlock Text="Requests blocked" Style="{StaticResource BodyMuted}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="#B88A2E"/>
+                            <TextBlock x:Name="StatBlocklist" Text="0" FontSize="26" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,8,0,0"/>
+                            <TextBlock Text="Domains in block list" Style="{StaticResource BodyMuted}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="4" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="#B88A2E"/>
+                            <TextBlock x:Name="StatAllowed" Text="0" FontSize="26" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,8,0,0"/>
+                            <TextBlock Text="Sites you allowed" Style="{StaticResource BodyMuted}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="3" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                            <Button DockPanel.Dock="Right" Content="View all" Style="{StaticResource SecondaryButton}" Click="ViewAllLog_Click"/>
+                            <TextBlock Text="Recent activity" Style="{StaticResource SectionTitle}" Margin="0"/>
+                        </DockPanel>
+                        <ItemsControl x:Name="RecentActivityList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,6">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="28"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Glyph}" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{Binding GlyphBrush}"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Summary}" Foreground="{StaticResource NavyBrush}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding TimestampDisplay}" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <!-- Full activity log -->
+            <Grid x:Name="LogPage" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DockPanel Margin="0,0,0,14">
+                    <Button DockPanel.Dock="Left" Content="← Back" Style="{StaticResource SecondaryButton}" Click="BackFromLog_Click" Margin="0"/>
+                    <TextBlock Text="Activity log" FontSize="24" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="16,0,0,0" VerticalAlignment="Center"/>
+                </DockPanel>
+                <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                            <Button Content="Refresh" Style="{StaticResource SecondaryButton}" Click="RefreshLogButton_Click"/>
+                            <Button Content="Allow selected site" Style="{StaticResource SecondaryButton}" Click="AllowSelectedLogDomainButton_Click"/>
+                            <Button Content="Clear log" Style="{StaticResource SecondaryButton}" Click="ClearLogButton_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="LogDataGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
+                                  BorderThickness="0" Background="Transparent" GridLinesVisibility="Horizontal">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Time" Binding="{Binding TimestampDisplay}" Width="150"/>
+                                <DataGridTextColumn Header="App" Binding="{Binding AppName}" Width="140"/>
+                                <DataGridTextColumn Header="Domain" Binding="{Binding Domain}" Width="*"/>
+                                <DataGridTextColumn Header="Result" Binding="{Binding DecisionDisplay}" Width="150"/>
+                                <DataGridTextColumn Header="Rule" Binding="{Binding MatchedRule}" Width="200"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <!-- Protection -->
+            <ScrollViewer x:Name="ProtectionPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Protection" FontSize="30" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,0,0,16"/>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Text="Start with Windows" Style="{StaticResource SectionTitle}"/>
+                            <CheckBox x:Name="AutoStartCheckBox" Content="Turn on automatically at sign-in (runs with administrator rights, no UAC prompt)"
+                                      Margin="0,4,0,8" Checked="AutoStartCheckBox_Changed" Unchecked="AutoStartCheckBox_Changed"/>
+                            <TextBlock Style="{StaticResource BodyMuted}" FontSize="12">
+                                Registered as a Windows Scheduled Task so it starts silently, and as a Run entry so it appears in Task Manager's Startup tab.
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Text="Automatic list updates" Style="{StaticResource SectionTitle}"/>
+                            <TextBlock Text="How often to refresh the block lists while Polar Ad is running (hours)." Style="{StaticResource BodyMuted}"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBox x:Name="AutoUpdateIntervalTextBox" Width="70" VerticalContentAlignment="Center" Padding="6,4"/>
+                                <Button Content="Save" Style="{StaticResource PrimaryButton}" Click="SaveAutoUpdateIntervalButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Network recovery" Style="{StaticResource SectionTitle}"/>
+                            <TextBlock Style="{StaticResource BodyMuted}" Margin="0,0,0,4">
+                                While protection is on, Polar Ad points this PC's DNS at itself. Turning protection off or exiting restores the original DNS. If your internet stops working after a crash, use the button below.
+                            </TextBlock>
+                            <Button Content="Restore network settings now" Style="{StaticResource SecondaryButton}" Click="EmergencyRestoreButton_Click" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Block List -->
+            <ScrollViewer x:Name="BlockListPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Block List" FontSize="30" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,0,0,16"/>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock x:Name="BlocklistInfoText" Foreground="{StaticResource NavyBrush}" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button x:Name="UpdateBlocklistButton" Content="Update now" Style="{StaticResource PrimaryButton}" Click="UpdateBlocklistButton_Click" Margin="0,0,8,0"/>
+                                <TextBlock x:Name="BlocklistUpdateStatusText" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="My block rules" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Domains you add here are always blocked, including their subdomains." Style="{StaticResource BodyMuted}"/>
+                                <DockPanel Margin="0,10,0,8">
+                                    <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Click="AddBlockRuleButton_Click"/>
+                                    <TextBox x:Name="NewBlockRuleTextBox" VerticalContentAlignment="Center" Padding="6,4"/>
+                                </DockPanel>
+                                <ListBox x:Name="BlockRulesListBox" Height="260" BorderThickness="0" Background="Transparent"/>
+                                <Button Content="Remove selected" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Click="RemoveBlockRuleButton_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Allowed sites" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="If a site breaks, add it here to stop blocking it right away." Style="{StaticResource BodyMuted}"/>
+                                <DockPanel Margin="0,10,0,8">
+                                    <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Click="AddAllowEntryButton_Click"/>
+                                    <TextBox x:Name="NewAllowEntryTextBox" VerticalContentAlignment="Center" Padding="6,4"/>
+                                </DockPanel>
+                                <ListBox x:Name="AllowlistListBox" Height="260" BorderThickness="0" Background="Transparent"/>
+                                <Button Content="Remove selected" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Click="RemoveAllowEntryButton_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Settings -->
+            <ScrollViewer x:Name="SettingsPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Settings" FontSize="30" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,0,0,16"/>
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Block list sources" Style="{StaticResource SectionTitle}"/>
+                            <TextBlock Text="One URL per line. Hosts-format and AdBlock-format lists are both supported." Style="{StaticResource BodyMuted}"/>
+                            <TextBox x:Name="BlocklistSourcesTextBox" Height="120" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,10,0,0" Padding="6"/>
+                            <Button Content="Save sources" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Click="SaveBlocklistSourcesButton_Click"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- About -->
+            <ScrollViewer x:Name="AboutPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="About" FontSize="30" FontWeight="Bold" Foreground="{StaticResource NavyBrush}" Margin="0,0,0,16"/>
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock FontSize="22" FontWeight="Bold" Foreground="{StaticResource NavyBrush}">
+                                <Run Text="Polar "/><Run Text="Ad" Foreground="#B88A2E"/>
+                            </TextBlock>
+                            <TextBlock Text="Quietly blocks the clutter." FontSize="14" Style="{StaticResource BodyMuted}" Margin="0,2,0,12"/>
+                            <TextBlock Style="{StaticResource BodyMuted}" Margin="0,0,0,8">
+                                Blocks ads and trackers at the DNS level for every browser on this PC, without installing extensions.
+                                Works best with ad networks that serve from their own domains; ads served from the same domain as the content may still show.
+                            </TextBlock>
+                            <TextBlock Text="Version 0.2.0" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

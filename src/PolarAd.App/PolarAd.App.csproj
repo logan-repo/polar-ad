@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\PolarAd.Core\PolarAd.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>PolarAd</AssemblyName>
+    <RootNamespace>PolarAd.App</RootNamespace>
+    <Platforms>x64</Platforms>
+    <!--
+      PublishSingleFile only bundles managed assemblies by default. WPF's native
+      interop DLLs (PresentationNative_*.dll, wpfgfx_*.dll, vcruntime140_cor3.dll,
+      D3DCompiler_47_cor3.dll) are native, so without this they're silently left
+      out of the single-file bundle and the app crashes at startup with
+      System.DllNotFoundException the first time WPF touches a window handle —
+      no window, no error dialog, just a silent crash (see Windows Event Viewer
+      "Application Error" / ".NET Runtime" entries for PolarAd.exe if this
+      regresses).
+    -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+
+</Project>
