@@ -86,6 +86,7 @@ public partial class MainWindow : Window
             .Select(e => new LogRowViewModel(e)).ToList();
 
         var lastUpdate = _service.Settings.LastBlocklistUpdate;
+        BuiltInRulesCountText.Text = $"기본 규칙 {_service.RuleEngine.BuiltInRules.Count:N0}개 (항상 적용, 허용 목록에 추가하면 예외 처리)";
         BlocklistInfoText.Text = lastUpdate.HasValue
             ? $"도메인 {_service.RuleEngine.PublicBlocklist.Count:N0}개 · 마지막 업데이트 {lastUpdate.Value.LocalDateTime:yyyy-MM-dd HH:mm}"
             : $"도메인 {_service.RuleEngine.PublicBlocklist.Count:N0}개 · 아직 업데이트하지 않음";

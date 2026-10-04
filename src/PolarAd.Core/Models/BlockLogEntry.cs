@@ -5,6 +5,7 @@ public enum BlockDecision
     Allowed,
     BlockedByList,
     BlockedByUserRule,
+    BlockedByBuiltIn,
     AllowedByUserAllowlist,
 }
 

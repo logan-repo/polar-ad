@@ -27,17 +27,18 @@ public sealed class LogRowViewModel
         Domain = entry.Domain;
         MatchedRule = entry.MatchedRule;
 
-        bool blocked = entry.Decision is BlockDecision.BlockedByList or BlockDecision.BlockedByUserRule;
+        bool blocked = entry.Decision is BlockDecision.BlockedByList or BlockDecision.BlockedByUserRule or BlockDecision.BlockedByBuiltIn;
         DecisionDisplay = entry.Decision switch
         {
-            BlockDecision.BlockedByList => "Blocked (block list)",
-            BlockDecision.BlockedByUserRule => "Blocked (your rule)",
-            BlockDecision.AllowedByUserAllowlist => "Allowed (your list)",
-            _ => "Allowed",
+            BlockDecision.BlockedByList => "차단 (공개 목록)",
+            BlockDecision.BlockedByUserRule => "차단 (내 규칙)",
+            BlockDecision.BlockedByBuiltIn => "차단 (기본 규칙)",
+            BlockDecision.AllowedByUserAllowlist => "허용 (허용 목록)",
+            _ => "허용",
         };
 
         Glyph = blocked ? "" : "";
         GlyphBrush = blocked ? BlockedBrush : AllowedBrush;
-        Summary = $"{(blocked ? "Blocked" : "Allowed")}  {entry.Domain}";
+        Summary = $"{(blocked ? "차단" : "허용")}  {entry.Domain}";
     }
 }

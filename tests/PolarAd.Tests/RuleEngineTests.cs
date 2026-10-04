@@ -80,4 +80,21 @@ public class RuleEngineTests
         var result = engine.Evaluate("ads.example.com");
         Assert.True(result.Blocked);
     }
+
+    [Fact]
+    public void Built_in_rules_are_always_applied()
+    {
+        var engine = new RuleEngine();
+        var result = engine.Evaluate("image.ruliweb.com");
+        Assert.True(result.Blocked);
+        Assert.Equal(BlockDecision.BlockedByBuiltIn, result.Decision);
+    }
+
+    [Fact]
+    public void Allowlist_overrides_built_in_rules()
+    {
+        var engine = new RuleEngine();
+        engine.Allowlist.Add("image.ruliweb.com");
+        Assert.False(engine.Evaluate("image.ruliweb.com").Blocked);
+    }
 }

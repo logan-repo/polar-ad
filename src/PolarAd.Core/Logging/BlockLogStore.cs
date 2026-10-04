@@ -49,7 +49,7 @@ public sealed class BlockLogStore
         {
             lock (_lock)
             {
-                return _entries.Count(e => e.Decision is BlockDecision.BlockedByList or BlockDecision.BlockedByUserRule);
+                return _entries.Count(e => e.Decision is BlockDecision.BlockedByList or BlockDecision.BlockedByUserRule or BlockDecision.BlockedByBuiltIn);
             }
         }
     }
