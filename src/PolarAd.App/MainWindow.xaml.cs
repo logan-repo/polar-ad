@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Windows;
 using RadioButton = System.Windows.Controls.RadioButton;
 using PolarAd.Core;
+using PolarAd.Core.Rules;
 using PolarAd.Core.Settings;
 using PolarAd.Core.Startup;
 
@@ -192,6 +193,8 @@ public partial class MainWindow : Window
 
         AllowlistListBox.ItemsSource = null;
         AllowlistListBox.ItemsSource = _service.RuleEngine.Allowlist.All().OrderBy(d => d).ToList();
+
+        BuiltInRulesListBox.ItemsSource = BuiltInRules.Domains.OrderBy(d => d).ToList();
     }
 
     private void AddBlockRuleButton_Click(object sender, RoutedEventArgs e)
