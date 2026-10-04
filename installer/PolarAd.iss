@@ -24,7 +24,7 @@
 ;     resolver that's about to stop existing.
 
 #define MyAppName "Polar Project"
-#define MyAppVersion "0.2.0"
+#define MyAppVersion "1.0.0"
 #define MyAppPublisher "Polar Project"
 #define MyAppExeName "PolarAd.exe"
 

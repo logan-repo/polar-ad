@@ -286,7 +286,7 @@
                                 브라우저 확장 프로그램 없이, DNS 단계에서 이 PC의 모든 브라우저 광고와 추적 요청을 차단합니다.
                                 광고가 별도 도메인에서 오는 경우에 가장 잘 동작합니다. 콘텐츠와 같은 도메인에서 나오는 광고는 계속 보일 수 있습니다.
                             </TextBlock>
-                            <TextBlock Text="Version 0.2.0" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
+                            <TextBlock Text="Version 1.0.0" Foreground="{StaticResource MutedBrush}" FontSize="12"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>

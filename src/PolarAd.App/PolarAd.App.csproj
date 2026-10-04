@@ -13,6 +13,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>PolarAd</AssemblyName>
+    <Version>1.0.0</Version>
     <RootNamespace>PolarAd.App</RootNamespace>
     <Platforms>x64</Platforms>
     <!--
