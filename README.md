@@ -36,7 +36,19 @@ Polar Ad는 Windows PC의 **모든 브라우저**(Chrome, Edge, Firefox 등)에�
 3. 설치 중 **"Windows 시작 시 자동 실행"** 을 체크한 상태로 두면 로그인할 때 자동으로 켜집니다.
 4. 시작 메뉴에서 **Polar Ad**를 실행하고, **보호 기능 켜기**를 누르세요.
 
-**시스템 요구 사항**: Windows 10 / 11 (64비트), 관리자 권한
+### 설치 전 필요한 것
+
+설치 프로그램 하나로 끝나며, 별도로 설치해야 하는 프로그램은 **없습니다**. .NET 런타임과 WPF는 실행 파일 안에 포함되어 있어요.
+
+| 항목 | 내용 |
+|---|---|
+| 운영체제 | Windows 10 / 11 (64비트) |
+| 권한 | 관리자 권한 (DNS 설정 변경과 UDP 53번 포트 사용에 필요) |
+| 인터넷 | 차단 목록을 내려받을 때 필요 (한 번 받아 두면 오프라인에서도 동작) |
+| 포트 | 이 PC의 UDP 53번 포트를 사용하므로, 다른 DNS 프로그램(예: Acrylic DNS Proxy)과 동시에 쓰면 충돌할 수 있습니다 |
+| Windows 기본 구성 요소 | 작업 스케줄러, WMI, `ipconfig`, `powershell`(제거 시에만 사용). 모두 Windows에 기본으로 들어 있습니다 |
+
+Visual C++ 재배포 패키지나 .NET 런타임은 설치하지 않아도 됩니다. 다만 실제로 설치 기록이 없는 깨끗한 PC에서는 아직 검증하지 않았습니다.
 
 ---
 
@@ -70,6 +82,11 @@ Polar Ad는 **도메인 단위**로 차단합니다. 그래서 다음을 분명�
 ---
 
 ## 개발자용 빌드
+
+개발 환경에 필요한 것:
+- **.NET 8 SDK** (`winget install Microsoft.DotNet.SDK.8`)
+- **Inno Setup 6** (설치 프로그램을 만들 때만 필요, `winget install JRSoftware.InnoSetup`)
+- Git
 
 ```bash
 dotnet test PolarAd.sln
